@@ -54,7 +54,7 @@ users_data = []
     ability: random_ability,
     photo: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg",
     email: "#{first[0]}_#{last}@example.com".downcase,
-    password_digest: "Passwor0d"
+    password: "Passwor0d"
   }
 end
 
