@@ -78,7 +78,7 @@ def random_notes
 end
 
 posts_data = []
-50.times do
+200.times do
   posts_data << {
     user: User.all.sample,
     trail: Trail.all.sample,
