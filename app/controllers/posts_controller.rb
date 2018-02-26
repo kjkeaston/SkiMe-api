@@ -19,7 +19,9 @@ class PostsController < ApplicationController
 
     if @post.save
       render :show, status: :created, location: @post
+      # flash[:notice] = "New review added!"
     else
+      # flash[:error] = post.errors.full_messages.join(", ")
       render json: @post.errors, status: :unprocessable_entity
     end
   end

@@ -61,30 +61,53 @@ end
 users = User.create(users_data)
 
 # => POSTS
-def random_snow_condition
-  ["Icy, crusty, just no good", "Poor coverage and cut up", "Get's the job done", "Packed powder but still send worthy", "Fresh pow, bring your snorkel"].sample
-end
-
-def random_crowd_level
-  ["Tons of people everywhere", "Average - about what you expect", "Had the run to myself"].sample
-end
-
 def random_star_rating
-  [1, 2, 3, 4, 5].sample
+  ["1", "2", "3", "4", "5"].sample
 end
+
+def get_snow_condition(snow)
+  snow_con = {
+    "1": "Icy, crusty",
+    "2": "Poor coverage, chopped up",
+    "3": "Packed powder but gets the job done",
+    "4": "Packed powder but gets the job done",
+    "5": "Fresh pow, bring your snorkel"
+  }
+  return snow_con[snow]
+end
+
+def get_crowd_level(crowd)
+  crowd_lev = {
+    "1": "Packed, people everywhere",
+    "2": "Average, about what you'd expect",
+    "3": "Average, about what you'd expect",
+    "4": "Had the run to myself",
+    "5": "Had the run to myself"
+  }
+  return crowd_lev[crowd]
+end
+
+# def random_snow_condition
+#   ["Icy, crusty", "Poor coverage, chopped up", "Packed powder but gets the job done", "Fresh pow, bring your snorkel"].sample
+# end
+
+# def random_crowd_level
+#   ["Packed, people everywhere", "Average, about what you'd expect", "Had the run to myself"].sample
+# end
 
 def random_notes
-  ["Saw a bear", "Too many kids", "People sitting in the middle of trail", "", "Went full send and lost my ski pass"].sample
+  ["Saw a bear", "Poor coverage in the trees", "People sitting in the middle of trail", "", "Went full send and lost my ski pass"].sample
 end
 
 posts_data = []
 200.times do
+  star_rating_assigned = random_star_rating
   posts_data << {
     user: User.all.sample,
     trail: Trail.all.sample,
-    snow_condition: random_snow_condition,
-    crowd_level: random_crowd_level,
-    star_rating: random_star_rating,
+    star_rating: star_rating_assigned,
+    snow_condition: get_snow_condition(star_rating_assigned.to_sym),
+    crowd_level: get_crowd_level(star_rating_assigned.to_sym),
     notes: random_notes
   }
 end
