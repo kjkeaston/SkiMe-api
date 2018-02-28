@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-
 # About
 **SkiMe** - Skiing is awesome! Skiing on ice? Not so much! SkiMe sets out to solve the problem of not knowing individual trail conditions until it’s too late.
 
@@ -27,10 +25,6 @@ Additional information about dependencies can be found in package.json for the f
 
 ## Misc.
 User stories, ERD and sprints can be found at [SkiMe Planning](https://docs.google.com/document/d/15cgaK5j1A_OZDtIFn_dI-0Qt21Q_IZt3b7RPJG8elDA/edit)
-
-**Wireframes**
-
-![wireframes](/public/wireframes.JPG)
 
 ## Planned Features
 * Add more resorts
