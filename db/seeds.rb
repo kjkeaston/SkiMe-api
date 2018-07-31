@@ -5,29 +5,40 @@ Trail.destroy_all
 Resort.destroy_all
 User.destroy_all
 
+
 # => RESORTS
 heavenly = Resort.create(name: "Heavenly Mountain Resort")
 northstar = Resort.create(name: "Northstar California")
 kirkwood = Resort.create(name: "Kirkwood Mountain Resort")
 
 # => TRAILS
-csv_heavenly_text = File.read(Rails.root.join('lib', 'seeds', 'heavenly_trails.csv'))
-csv_heavenly = CSV.parse(csv_heavenly_text, :headers => true, :encoding => 'ISO-8859-1')
-csv_heavenly.each do |row|
-  t = Trail.create(name: row['name'], difficulty: row['difficulty'], resort: heavenly)
+all_resorts = { "heavenly": heavenly, "northstar": northstar, "kirkwood": kirkwood }
+
+all_resorts.each do |resort, resort_object|
+  csv_file = File.read(Rails.root.join('lib', 'seeds', "#{resort}_trails.csv"))
+  csv_parsed = CSV.parse(csv_file, :headers => true, :encoding => 'ISO-8859-1')
+  csv_parsed.each do |row|
+    t = Trail.create(name: row['name'], difficulty: row['difficulty'], resort: resort_object)
+  end
 end
 
-csv_northstar_text = File.read(Rails.root.join('lib', 'seeds', 'northstar_trails.csv'))
-csv_northstar = CSV.parse(csv_northstar_text, :headers => true, :encoding => 'ISO-8859-1')
-csv_northstar.each do |row|
-  t = Trail.create(name: row['name'], difficulty: row['difficulty'], resort: northstar)
-end
+# csv_heavenly_text = File.read(Rails.root.join('lib', 'seeds', 'heavenly_trails.csv'))
+# csv_heavenly = CSV.parse(csv_heavenly_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_heavenly.each do |row|
+#   t = Trail.create(name: row['name'], difficulty: row['difficulty'], resort: heavenly)
+# end
 
-csv_kirkwood_text = File.read(Rails.root.join('lib', 'seeds', 'kirkwood_trails.csv'))
-csv_kirkwood = CSV.parse(csv_kirkwood_text, :headers => true, :encoding => 'ISO-8859-1')
-csv_kirkwood.each do |row|
-  t = Trail.create(name: row['name'], difficulty: row['difficulty'], resort: kirkwood)
-end
+# csv_northstar_text = File.read(Rails.root.join('lib', 'seeds', 'northstar_trails.csv'))
+# csv_northstar = CSV.parse(csv_northstar_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_northstar.each do |row|
+#   t = Trail.create(name: row['name'], difficulty: row['difficulty'], resort: northstar)
+# end
+
+# csv_kirkwood_text = File.read(Rails.root.join('lib', 'seeds', 'kirkwood_trails.csv'))
+# csv_kirkwood = CSV.parse(csv_kirkwood_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_kirkwood.each do |row|
+#   t = Trail.create(name: row['name'], difficulty: row['difficulty'], resort: kirkwood)
+# end
 
 # => USERS
 def random_discipline
@@ -96,7 +107,7 @@ end
 # end
 
 def random_notes
-  ["Saw a bear", "Poor coverage in the trees", "People sitting in the middle of trail", "", "Went full send and lost my ski pass"].sample
+  ["Saw a bear", "Poor coverage in the trees", "People sitting in the middle of trail", "Went full send and lost my ski pass", "Better than working"].sample
 end
 
 posts_data = []
